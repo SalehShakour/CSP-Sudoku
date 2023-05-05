@@ -1,9 +1,8 @@
 import time
-from collections import deque
 from typing import Optional
 from PriorityQueue import PriorityQueue
-from CSP.Problem import Problem
-from CSP.Variable import Variable
+from CSP.SudokuProblem import Problem
+from CSP.SudokuVariable import Variable
 
 
 class Solver:

@@ -1,5 +1,5 @@
-from CSP.Solver import Solver
-from Sudoku.SudokuProblem import SudokuProblem
+from CSP.SudokuSolver import Solver
+from CSP.SudokuProblem import Problem
 
 # grid = [
 #     [2, 0, 0, 3, 0, 0, 0, 0, 0],
@@ -37,7 +37,7 @@ grid1 = [
 #     [0, 0, 5, 0, 1, 0, 3, 0, 0]
 # ]
 #
-sudoku = SudokuProblem(grid1)
+sudoku = Problem(grid1)
 s = Solver(sudoku)
 s.solve()
 sudoku.print_assignments()

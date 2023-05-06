@@ -9,9 +9,9 @@ class Solver:
     def __init__(self, problem: Problem):
         self.problem = problem
 
-    def is_finished(self) -> bool:
-        return all([x.is_satisfied() for x in self.problem.constraints]) and len(
-            self.problem.get_unassigned_variables()) == 0
+    # def is_finished(self) -> bool:
+    #     return all([x.is_satisfied() for x in self.problem.constraints]) and len(
+    #         self.problem.get_unassigned_variables()) == 0
 
     def solve(self):
         self.problem.calculate_neighbors()

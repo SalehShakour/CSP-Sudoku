@@ -53,4 +53,3 @@ sudoku = Problem(grid1)
 s = Solver(sudoku)
 s.solve()
 sudoku.print_assignments()
-

@@ -57,8 +57,8 @@ class Problem:
         for variable in self.variables:
             print(f"{variable.name} is set to {variable.value}")
 
-    def get_neighbor_constraints(self, variable: Variable) -> list[Constraint]:
-        return [constraint for constraint in self.constraints if variable in constraint.variables]
+    # def get_neighbor_constraints(self, variable: Variable) -> list[Constraint]:
+    #     return [constraint for constraint in self.constraints if variable in constraint.variables]
 
     def calculate_neighbors(self):
         for variable in self.variables:

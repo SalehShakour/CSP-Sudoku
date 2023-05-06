@@ -6,6 +6,7 @@ class Problem:
     def __init__(self, grid, constraints=None, variables: list[Variable] = None, name=""):
         if constraints is None:
             constraints = []
+        self.grid = grid
         self.constraints = constraints
         self.variables = variables
         self.name = name
@@ -54,16 +55,39 @@ class Problem:
         return [x for x in self.variables if not x.has_value]
 
     def print_assignments(self):
-        for variable in self.variables:
-            print(f"{variable.name} is set to {variable.value}")
+        for i in self.check():
+            print(i)
 
-    # def get_neighbor_constraints(self, variable: Variable) -> list[Constraint]:
-    #     return [constraint for constraint in self.constraints if variable in constraint.variables]
+
 
     def calculate_neighbors(self):
         for variable in self.variables:
             for constraint in self.constraints:
                 if variable in constraint.variables:
                     for other_var in constraint.variables:
-                        if other_var is not variable:
+                        if other_var.name is not variable.name:
                             variable.neighbors.add(other_var)
+
+    def check(self):
+        arr = self.grid
+
+        def check_true(arr, row=0, col=0):
+            if row == 9:
+                return True
+            if col == 9:
+                return check_true(arr, row + 1, 0)
+            if arr[row][col] != 0:
+                return check_true(arr, row, col + 1)
+            for num in range(1, 10):
+                if (num not in arr[row] and
+                        all(num != arr[i][col] for i in range(9)) and
+                        all(num != arr[i // 3 + row // 3 * 3][col // 3 * 3 + i % 3] for i in range(9))):
+                    arr[row][col] = num
+                    if check_true(arr, row, col + 1):
+                        return True
+                    arr[row][col] = 0
+            return False
+
+        arr_copy = [row[:] for row in arr]
+        check_true(arr_copy)
+        return arr_copy

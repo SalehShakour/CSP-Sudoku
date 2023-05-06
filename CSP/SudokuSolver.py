@@ -28,8 +28,12 @@ class Solver:
         if len(self.problem.get_unassigned_variables()) == 0:
             return True
 
+        # MRV: minimum remaining value
         var = self.select_unassigned_variable()
+
+        # least constraining value
         queue = self.order_domain_values(var)
+
         while queue.size > 0:
             var.value = queue.dequeue()
             if self.is_consistent(var) and self.forward_check(var):
@@ -49,15 +53,15 @@ class Solver:
         queue = PriorityQueue()
         for value in var.domain:
             var.value = value
-            costract = 0
+            contract = 0
             for neighbor in var.neighbors:
                 if not neighbor.has_value:
                     for other_var_candidate in neighbor.domain:
                         neighbor.value = other_var_candidate
                         if not self.is_consistent(neighbor):
-                            costract += 1
+                            contract += 1
                         neighbor.value = None
-            queue.enqueue_with_priority(costract, value)
+            queue.enqueue_with_priority(contract, value)
             var.value = None
         return queue
 

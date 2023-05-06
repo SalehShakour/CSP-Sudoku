@@ -49,7 +49,7 @@ grid4 = [
     [0, 0, 0, 0, 8, 0, 0, 7, 9]
 ]
 
-sudoku = Problem(grid4)
+sudoku = Problem(grid1)
 s = Solver(sudoku)
 s.solve()
 sudoku.print_assignments()

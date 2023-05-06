@@ -54,20 +54,7 @@ class Problem:
     def get_unassigned_variables(self) -> list[Variable]:
         return [x for x in self.variables if not x.has_value]
 
-    def print_assignments(self):
-        for i in self.check():
-            print(i)
-
-
-
-    def calculate_neighbors(self):
-        for variable in self.variables:
-            for constraint in self.constraints:
-                if variable in constraint.variables:
-                    for other_var in constraint.variables:
-                        if other_var.name is not variable.name:
-                            variable.neighbors.add(other_var)
-
+    # check valid or invalid
     def check(self):
         arr = self.grid
 
@@ -91,3 +78,15 @@ class Problem:
         arr_copy = [row[:] for row in arr]
         check_true(arr_copy)
         return arr_copy
+
+    def print_assignments(self):
+        for i in self.check():
+            print(i)
+
+    def calculate_neighbors(self):
+        for variable in self.variables:
+            for constraint in self.constraints:
+                if variable in constraint.variables:
+                    for other_var in constraint.variables:
+                        if other_var.name is not variable.name:
+                            variable.neighbors.add(other_var)
